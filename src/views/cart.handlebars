@@ -1,0 +1,57 @@
+<div class="flex justify-between w-auto m-2 bg-gray-800 px-8 py-8 rounded-xl">
+  <a href="/">
+    <button
+      class="text-slate-100 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-2">Home
+      🏚️</button>
+  </a>
+  <a href="/realTimeProducts">
+    <button
+      class="text-slate-100 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-2">Productos
+      en tiempo real🛩️</button>
+  </a>
+  <a href="/chat">
+    <button
+      class="text-slate-100 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-2">Chatea
+      con nosotros💬</button>
+  </a>
+</div>
+
+<h1
+  style="letter-spacing:5px; font-weight:bolder; font-size:60px; border-bottom:solid white 2px; margin-bottom:40px; padding-bottom:50px; padding-top:50px; border-top:solid white 2px;"
+  class="flex p-4 mb-4 justify-center font-mono text-2xl text-slate-200">CARRITO DE COMPRAS</h1>
+
+<h2 class="flex p-2 justify-center font-mono text-2xl text-slate-200">Su ID de su carrito es:</h2>
+<span class="flex p-2 justify-center font-mono text-2xl text-slate-200" id="cartId"> ({{cart._id}})</span>
+<div style="border-bottom:solid white 2px; padding-bottom:50px;" id="cartDetail"
+  class="flex flex-col justify-center m-6 items-center">
+  {{#each cart.products}}
+  <div class="max-w-4xl border rounded-lg shadow bg-gray-700/50 border-gray-600 my-2" id="{{this.productId._id}}">
+    <div class="flex flex-wrap w-full p-2 justify-evenly">
+      <img src="{{this.productId.thumbnail}}" alt="product image"
+        class="aspect-square max-h-32 m-2 ring-4 rounded-xl" />
+      <div class="px-5 mt-2">
+        <h5 class="text-2xl font-semibold tracking-tight text-white text-center">{{this.productId.title}}</h5>
+        <p class="font-light tracking-tight text-white my-1">Cantidad Selecionada: {{this.quantity}}</p>
+        <p class="font-light tracking-tight text-white my-1">Precio Unitario: ${{this.productId.price}}</p>
+        <div class="flex justify-between">
+
+          <p class="text-lg tracking-wider text-white my-1">Precio Total: ${{multiply this.productId.price
+            this.quantity}}</p>
+
+          <form class="flex justify-end" id="removeFromCartForm-{{this.productId._id}}">
+
+            <button type="submit"
+              class="text-slate-100 bg-red-700 hover:bg-red-800 focus:ring-2 focus:outline-none focus:ring-red-500 font-medium rounded-lg text-xs w-full sm:w-auto px-3 py-1.5 text-center">Eliminar</span></button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  {{/each}}
+</div>
+<script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
+"></script>
+<script src="/js/cart.js"></script>

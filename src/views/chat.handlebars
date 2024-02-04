@@ -1,0 +1,62 @@
+  <div class="flex justify-between w-auto m-2 bg-gray-800 px-8 py-8 rounded-xl">
+    <a href="/">
+      <button
+        class="text-slate-100 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-2">Home
+        🏚️</button>
+    </a>
+    <a href="/realTimeProducts">
+      <button
+        class="text-slate-100 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-2">Productos
+        en tiempo real🛩️</button>
+    </a>
+    <a href="/chat">
+      <button
+        class="text-slate-100 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-2">Chatea
+        con nosotros💬</button>
+    </a>
+  </div>
+  <div id="app" class="p-4 bg-slate-800/95 h-auto">
+    <h1 style="letter-spacing:5px; font-weight:bolder;"
+      class="flex p-4 mb-4 justify-center font-mono text-2xl text-slate-200">CHAT</h1>
+    <h2 style="border-bottom:solid white 2px;" class="flex p-2 justify-center font-mono text-2xl text-slate-200">Es hora
+      de charlar un poco 😁</h2>
+
+    <div class="flex flex-col justify-around w-auto m-2 bg-gray-800 px-8 py-8 rounded-xl">
+      <label for="chatBox" class="flex py-2 mb-2 font-mono text-lg text-slate-200">¡Chatear aqui! Presione enter para
+        enviar un mensaje:</label>
+      <input id="chatBox"
+        class="p-2 block w-full border rounded-lg text-gray-400 focus:outline-none bg-gray-700 border-gray-600" />
+    </div>
+
+
+    <div id="messagesList">
+      {{#each messages}}
+      <div class="flex flex-row text-slate-200 w-10/12 border rounded-lg shadow bg-gray-700/90 border-gray-600 my-4 m-auto items-center"style="padding-bottom: 20px; padding-top:10px" >
+        <div class="relative mx-3">
+          <div class="relative w-10 h-10 overflow-hidden bg-gray-700 ring-2 ring-gray-400 rounded-full flex-shrink-0">
+            <svg class="absolute w-12 h-12 text-gray-500 -left-1" fill="currentColor" viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd">
+              </path>
+            </svg>
+          </div>
+          <p style="font-size: 17px;margin-top:10px; color:yellow;"
+            class="absolute top-0 left-0 w-full text-center text-xs text-white">{{this.user}}</p>
+        </div>
+        <div style="padding-left: 40px;border-left: solid 2px white;" class="ml-1 mr-4 text-justify text-slate-300">
+          <p style="padding-top: 10px;">{{this.message}}</p>
+          <br>
+          <p style="color: orange;" class="text-xs text-slate-50">{{this.timestamp}}</p>
+
+        </div>
+      </div>
+      {{/each}}
+    </div>
+
+
+    <script src="
+  https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
+  "></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js"></script>

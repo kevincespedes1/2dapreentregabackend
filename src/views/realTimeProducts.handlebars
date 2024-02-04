@@ -1,0 +1,91 @@
+<div class="flex justify-between w-auto m-2 bg-gray-800 px-8 py-8 rounded-xl">
+  <a href="/">
+    <button
+      class="text-slate-100 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-2">Home
+      🏚️</button>
+  </a>
+  <a href="/realTimeProducts">
+    <button
+      class="text-slate-100 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-2">Productos
+      en tiempo real🛩️</button>
+  </a>
+  <a href="/chat">
+    <button
+      class="text-slate-100 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-2">Chatea
+      con nosotros💬</button>
+  </a>
+</div>
+<div class="w-auto mx-2">
+  <br />
+  <hr /><br />
+</div>
+{{!-- ACA SE SEPARA EL HEADER --}}
+
+<h1 style="font-size:50px; margin-bottom:20px;" class="flex p-2 justify-center font-mono text-2xl text-slate-200">
+  Productos de tiempo real</h1>
+
+<div class="flex flex-row justify-center m-4">
+  {{#if hasPrevPage}}
+  <a href="/realTimeProducts?page={{prevPage}}"><button
+      class="text-slate-100 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-8 py-2.5 text-center ml-2">Anterior</button></a>
+  {{/if}}
+
+  <p
+    class="text-slate-100 bg-gray-500/50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-6 py-2.5 text-center mx-4">
+    {{page}}</p>
+
+  {{#if hasNextPage}}
+  <a href="/realTimeProducts?page={{nextPage}}"><button
+      class="text-slate-100 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-8 py-2.5 text-center ml-2">Siguiente</button></a>
+  {{/if}}
+</div>
+
+
+<div id="productsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+  {{#each products}}
+  <div style="margin:60px" class="max-w-sm border rounded-lg shadow bg-gray-800 border-gray-700 m-1" id="{{this._id}}">
+    <h5 style="text-align:center; margin-top:20px; margin-bottom:20px;"
+      class="text-2xl font-semibold tracking-tight text-white">{{this.title}}</h5>
+    <div class="flex flex-wrap w-full p-2 justify-evenly">
+      <img src="{{this.thumbnail}}" alt="product image" class="aspect-square max-h-40 m-2 ring-4 rounded-xl" />
+    </div>
+
+    <div class="px-5 pb-5">
+      <p style="text-align:center; margin-top:20px; margin-bottom:20px; font-size:15px;"
+        class="text-xs font-semibold tracking-tight text-white">{{this.description}}</p>
+      <form id="addToCartForm-{{this._id}}">
+        <div class="flex items-center justify-between">
+          <p class="text-3xl font-bold text-white pt-2">${{this.price}}</p>
+          <button type="submit"
+            class="text-slate-100 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center -mb-3">Agregar
+            al carrito🛒</button>
+        </div>
+        <div style=" margin-top:20px; margin-bottom:20px;" class="relative z-0 w-full mt-4 group">
+          <input
+            class="block py-2.5 px-0 w-full text-sm text-slate-200 bg-transparent border-0 border-b-2 border-gray-600 appearance-none focus:outline-none focus:ring-0 focus:border-blue-500 peer"
+            placeholder=" " type="text" name="cid" id="cid" required />
+          <label
+            class="peer-focus:font-medium absolute text-sm text-slate-200 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-90 peer-focus:-translate-y-6"
+            for="cid">ID del Carrito</label>
+        </div>
+      </form>
+      <a style="align-items:center;" href="product/{{this._id}}">
+        <button style="align-items:center;"
+          class="text-slate-100 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-2">Detalles
+          del producto</button>
+      </a>
+    </div>
+  </div>
+  {{/each}}
+</div>
+<div class="w-auto mx-2">
+  <br />
+  <hr /><br />
+</div>
+{{!-- ACA TERMINAN LOS PRODUCTOS --}}
+
+<script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js
+"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realTimeProducts.js"></script>
