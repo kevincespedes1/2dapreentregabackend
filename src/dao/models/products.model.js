@@ -19,7 +19,7 @@
     code: {
       type: String,
       required: true,
-    unique: true, // Asegura que el campo 'code' sea único
+    unique: true, 
     },
     price: {
       type: Number,

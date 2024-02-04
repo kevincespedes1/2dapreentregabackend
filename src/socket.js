@@ -21,7 +21,7 @@ socket.connect = (server) => {
     socket.on("add-message", async (message) => {
       const timestamp = new Date()
       const options = {
-        weekday: 'long', // Día de la semana en formato largo (ejemplo: "lunes")
+        weekday: 'long',
         year: 'numeric',
         month: 'long',
         day: 'numeric',

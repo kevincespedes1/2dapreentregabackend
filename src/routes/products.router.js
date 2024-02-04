@@ -131,20 +131,15 @@ router.post("/:cartId/add-product", async (req, res) => {
     const { productId, quantity } = req.body;
     const cartId = req.params.cartId;
 
-    // Verificar si el carrito existe (debes implementar la lógica para verificarlo)
     const cart = await CartModel.findById(cartId);
     if (!cart) {
       return res.status(404).json({ error: "Carrito no encontrado" });
     }
 
-    // Verificar si el producto existe
     const product = await ProductModel.findById(productId);
     if (!product) {
       return res.status(404).json({ error: "Producto no encontrado" });
     }
-
-    // Agregar el producto al carrito
-    // (Debes implementar la lógica para agregar el producto al carrito)
 
     res.status(200).json({ message: "Producto agregado al carrito exitosamente" });
   } catch (error) {
