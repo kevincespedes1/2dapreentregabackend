@@ -14,7 +14,7 @@ const cartManager = new CartManager();
 const router = Router();
 
 router.get("/", async (req, res) => {
-  const { limit = 10, page = 1, category, available, sort } = req.query;
+  const { limit = 3, page = 1, category, available, sort } = req.query;
   const {
     docs: products,
     hasPrevPage,

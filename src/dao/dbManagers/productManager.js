@@ -7,16 +7,21 @@ export default class ProductManager {
   getProducts = async (page, limit, category, available, sort) => {
     try {
       let queries = {};
-      category ? (queries.category = category.toUpperCase()) : null;
-      available ? (queries.status = available.toLowerCase()) : null;
-      parseInt(sort) === 1 ? (sort = { price: 1 }) : null;
-      parseInt(sort) === -1 ? (sort = { price: -1 }) : null;
-
+      category ? (queries.category = category) : null;
+      available ? (queries.status = available) : null;
+      let sortOption = {};
+      if (sort) {
+        if (parseInt(sort) === 1) {
+          sortOption = { price: 1 };
+        } else if (parseInt(sort) === -1) {
+          sortOption = { price: -1 };
+        }
+      }
       const products = await productModel.paginate(queries, {
-        limit: 5,
+        limit: parseInt(limit),
         page,
         lean: true,
-        sort,
+        sort: sortOption,
       });
 
       products.hasPrevPage

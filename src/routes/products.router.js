@@ -16,14 +16,27 @@ router.get("/", async (req, res) => {
       category = null,
       available = null,
       sort = null,
+      query = null, 
+
     } = req.query;
+
+    let queries = {};
+    category ? (queries.category = category.toUpperCase()) : null;
+    available ? (queries.status = available.toLowerCase()) : null;
+    parseInt(sort) === 1 ? (sort = { price: 1 }) : null;
+    parseInt(sort) === -1 ? (sort = { price: -1 }) : null;
+
+    if (query) {
+      queries.type = query.toLowerCase();
+    }
 
     const products = await productManager.getProducts(
       page,
       limit,
       category,
       available,
-      sort
+      sort,
+      queries,
     );
 
     if (!products)
